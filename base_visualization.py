@@ -11,15 +11,22 @@ black = [0, 0, 0]
 # 3~6 AATG, AATC, AGTG
 base = ['A', 'T', 'G', 'C']
 
-#cancer
+
+'''user defining variables'''
 cancer_candidate = [['A','A','T','G'], ['A','A','T','C'], ['A','G','T','G']]
+#cancer_seq_len = cancer_candidate.shape
+cancer_start_idx = 3
+sequence_length = 20
+'''user defining variables finished'''
+
+#cancer
 cancer_sequences = []
 for idx in range(180):
-    cancer_point = cancer_candidate[idx % 3] #cancer point will rotate 3 candidate
+    cancer_point = cancer_candidate[idx % len(cancer_candidate)] #cancer point will rotate 3 candidate
     sequence = []
     for j in range(16):
-        sequence.append(base[np.random.randint(3)])
-    cancer_sequence = sequence[:3] + cancer_point + sequence[3:]
+        sequence.append(base[np.random.randint(4)])
+    cancer_sequence = sequence[:cancer_start_idx] + cancer_point + sequence[cancer_start_idx:]
     cancer_sequences.append(cancer_sequence)
     print(cancer_sequence)
 
