@@ -37,7 +37,7 @@ print(sequence_color)
 
 for i in range(sequence_color.shape[0]):
     one_sequence = np.array(sequence_color[i], np.uint8)
-    print(one_sequence.shape)
+    #print(one_sequence.shape)
     one_sequence = np.reshape(one_sequence, (1, one_sequence.shape[0], one_sequence.shape[1]))
     im = Image.fromarray(one_sequence)
     im.save("cancer_folder/cancer_seq_{}.png".format(i))
@@ -46,4 +46,27 @@ for i in range(sequence_color.shape[0]):
 #not_cancer
 normal_sequences = []
 while len(normal_sequences) < 180:
+    sequence = []
+    for i in range(20):
+        sequence.append(base[np.random.randint(4)])
+    #if produced sequence is cancer sequence, ignore it.
+    if sequence[3:7] in cancer_candidate:
+        continue
     
+    normal_sequences.append(sequence)
+
+normal_sequences = np.array(normal_sequences)
+print(normal_sequences)
+
+sequence_color = np.zeros((normal_sequences.shape[0], normal_sequences.shape[1], 3))
+sequence_color[normal_sequences == 'A'] = red
+sequence_color[normal_sequences == 'T'] = green
+sequence_color[normal_sequences == 'G'] = blue
+sequence_color[normal_sequences == 'C'] = black
+
+for i in range(sequence_color.shape[0]):
+    one_sequence = np.array(sequence_color[i], np.uint8)
+    #print(one_sequence.shape)
+    one_sequence = np.reshape(one_sequence, (1, one_sequence.shape[0], one_sequence.shape[1]))
+    im = Image.fromarray(one_sequence)
+    im.save("normal_folder/normal_seq_{}.png".format(i))
