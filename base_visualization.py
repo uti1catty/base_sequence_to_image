@@ -98,3 +98,5 @@ print('normal_sequences:\n', normal_sequences)
 '''normal step 2. Make each sequence to image'''
 #saving color image of each cancer sequence
 sequences_to_image(normal_sequences, "normal_folder", "normal_seq")
+
+
