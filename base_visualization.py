@@ -7,6 +7,7 @@ green = [0, 255, 0]
 blue = [0, 0, 255]
 black = [0, 0, 0]
 
+np.random.seed(0)
 '''
 input
 sequences: shape(seq_num, seq_len) sequences
