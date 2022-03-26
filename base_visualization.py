@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 from PIL import Image
+import pandas as pd
 
 #Code wrote by uti1catty
 
@@ -102,3 +103,26 @@ print('normal_sequences:\n', normal_sequences)
 sequences_to_image(normal_sequences, "normal_folder", "normal_seq")
 
 
+'''step 3. Make every sequences to csv file with label'''
+#add label to cancer sequences 
+cancer_with_label = cancer_sequences.copy()
+cancer_label = [['cancer'] * cancer_sequences.shape[0]]
+cancer_label = np.array(cancer_label).T
+#print(cancer_label)
+cancer_with_label = np.append(cancer_with_label, cancer_label, axis=1)
+#print(cancer_with_label)
+
+#add label to normal sequences 
+normal_with_label = normal_sequences.copy()
+normal_label = [['normal'] * normal_sequences.shape[0]]
+normal_label = np.array(normal_label).T
+#print(normal_label)
+normal_with_label = np.append(normal_with_label, normal_label, axis=1)
+#print(normal_with_label)
+
+#make total sequences
+total_sequences = np.append(cancer_with_label, normal_with_label, axis=0)
+
+#make csv file
+df = pd.DataFrame(total_sequences)
+df.to_csv('sample.csv', index=False)
