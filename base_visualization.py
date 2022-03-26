@@ -125,4 +125,4 @@ total_sequences = np.append(cancer_with_label, normal_with_label, axis=0)
 
 #make csv file
 df = pd.DataFrame(total_sequences)
-df.to_csv('sample.csv', index=False)
+df.to_csv('total_sequences.csv', index=False)
